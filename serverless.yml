@@ -1,0 +1,52 @@
+org: utecps
+service: api-clientes
+
+provider:
+  name: aws
+  runtime: python3.13
+  memorySize: 1024
+  timeout: 20
+  iam:
+    role: arn:aws:iam::654654516540:role/LabRole
+
+functions:
+  listar:
+    handler: ListarClientes.lambda_handler
+    events:
+      - http:
+          path: /clientes/listar
+          method: get
+          cors: true
+          integration: lambda
+  buscar:
+    handler: BuscarCliente.lambda_handler
+    events:
+      - http:
+          path: /clientes/buscar
+          method: post
+          cors: true
+          integration: lambda
+  crear:
+    handler: CrearCliente.lambda_handler
+    events:
+      - http:
+          path: /clientes/crear
+          method: post
+          cors: true
+          integration: lambda
+  modificar:
+    handler: ModificarCliente.lambda_handler
+    events:
+      - http:
+          path: /clientes/modificar
+          method: put
+          cors: true
+          integration: lambda
+  eliminar:
+    handler: EliminarCliente.lambda_handler
+    events:
+      - http:
+          path: /clientes/eliminar
+          method: delete
+          cors: true
+          integration: lambda
